@@ -32,7 +32,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "vl53l0x_def.h"
 #include "vl53l0x_platform_log.h"
-#include "vl53l0x_i2c_platform.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -55,22 +54,15 @@ extern "C" {
  * @brief    Generic PAL device type that does link between API and platform abstraction layer
  *
  */
-typedef struct {
-    VL53L0X_DevData_t Data;               /*!< embed ST Ewok Dev  data as "Data"*/
-
-    /*!< user specific field */
-    uint8_t   I2cDevAddr;                /*!< i2c device address user specific field */
-    uint8_t   comms_type;                /*!< Type of comms : VL53L0X_COMMS_I2C or VL53L0X_COMMS_SPI */
-    uint16_t  comms_speed_khz;           /*!< Comms speed [kHz] : typically 400kHz for I2C           */
-
-} VL53L0X_Dev_t;
-
+struct VL53L0X_Dev {
+	VL53L0X_DevData_t Data;
+};
 
 /**
  * @brief   Declare the device Handle as a pointer of the structure @a VL53L0X_Dev_t.
  *
  */
-typedef VL53L0X_Dev_t* VL53L0X_DEV;
+typedef struct VL53L0X_Dev* VL53L0X_DEV;
 
 /**
  * @def PALDevDataGet
